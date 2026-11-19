@@ -1,6 +1,6 @@
 # Seacraft Frontend Skills
 
-Seacraft 前端开发规范 skill，当前包含 Vue、React、文件落位规范、公共组件使用规范和公共 hooks 五部分。文档采用“英文 YAML 元数据 + 中文规范说明 + 英文技术标识”的形式。
+Seacraft 前端开发规范 skill，当前包含 Vue、React、文件落位规范、公共组件、公共 hooks 和公共 utils 六部分。文档采用“英文 YAML 元数据 + 中文规范说明 + 英文技术标识”的形式。
 
 ## 包含的 Skill
 
@@ -68,6 +68,18 @@ Seacraft 前端开发规范 skill，当前包含 Vue、React、文件落位规�
 
 包含每个 hook 的签名、返回、依赖、用法、已知坑，以及把业务 hook 抽象成公共 hook 的依赖注入、类型、测试与打包指南。
 
+### `seacraft-shared-utils`
+
+公司公共前端 utils 的使用与提取规范，来源 `D:\LSWork` 下多个 Vue 后台项目：
+
+- 类型与值：`is`、`isFunction`、`isObject`、`isArray`、`getType` 等
+- 树与表格：`getFlatArr`、`findItemNested`、`handleProp`、`handleRowAccordingToProp`、`filterEnum`、`formatValue`
+- 格式化：`getTimeState`、`convertToChinaNum`、`formatNumberUnit`、`formatFileSize`、时间/日期换算
+- 浏览器与文件：脚本加载、剪贴板、DOM 交换、设备判断、query、UUID、MD5、base64、视频封面
+- 颜色：`hexToRgb`、`rgbToHex`、`getLightColor`、`getDarkColor`
+
+只收录跨项目复用、无业务/UI 依赖、模块加载无副作用的函数；菜单/权限/主题/播放器/socket 等业务 utils 明确排除。包含每个函数的签名、来源、行为、已知坑，以及去重、依赖治理、测试与 Vite 打包指南。
+
 ## 目录结构
 
 ```text
@@ -111,6 +123,15 @@ hz-skills/
 │       ├── inline-css-vars.md
 │       ├── echarts-hook.md
 │       └── extraction-guide.md
+├── seacraft-shared-utils/
+│   ├── SKILL.md
+│   └── references/
+│       ├── catalog.md
+│       ├── type-tree-table.md
+│       ├── format.md
+│       ├── browser-file.md
+│       ├── color.md
+│       └── extraction-guide.md
 └── seacraft-react-skills/
     ├── SKILL.md
     └── references/
@@ -135,6 +156,7 @@ Copy-Item -Recurse -Force .\seacraft-react-skills $skillRoot
 Copy-Item -Recurse -Force .\seacraft-frontend-spa-conventions $skillRoot
 Copy-Item -Recurse -Force .\seacraft-shared-components $skillRoot
 Copy-Item -Recurse -Force .\seacraft-shared-hooks $skillRoot
+Copy-Item -Recurse -Force .\seacraft-shared-utils $skillRoot
 ```
 
 macOS / Linux：
@@ -147,6 +169,7 @@ cp -R ./seacraft-react-skills "$skill_root/"
 cp -R ./seacraft-frontend-spa-conventions "$skill_root/"
 cp -R ./seacraft-shared-components "$skill_root/"
 cp -R ./seacraft-shared-hooks "$skill_root/"
+cp -R ./seacraft-shared-utils "$skill_root/"
 ```
 
 如果使用了自定义 `CODEX_HOME`，将 skill 搜索路径替换为：
@@ -170,6 +193,7 @@ $CODEX_HOME/skills
 - 新增、移动、重命名前端文件，或需要判定目录归属、分层与跨层引用时使用 `seacraft-frontend-spa-conventions`。目录结构与框架写法冲突时，以该 skill 为准。
 - 接入公司公共组件（`jy-player-ui` 播放器、`MultiWindowPlayer` 多画面、`PlayerMask` 遮罩、`SvgIcon` 图标、`GlobalUploader` 分片上传）、配置播放引擎、处理多屏同步或排查播放器异常时使用 `seacraft-shared-components`。
 - 使用或抽象通用公共 hooks（弹窗、确认、下载、表格、多选、CSS 变量、ECharts）时使用 `seacraft-shared-hooks`。
+- 新增或提取通用 utils（类型判断、树、时间/数字格式化、浏览器/DOM、设备、文件、颜色）时使用 `seacraft-shared-utils`。
 
 ### 显式调用
 
@@ -200,13 +224,18 @@ $seacraft-shared-hooks
 把这个页面的表格查询和跨页多选改用公共 hooks，并说明需要替换哪些依赖。
 ```
 
+```text
+$seacraft-shared-utils
+从这几个项目里提取时间格式化和设备判断的公共 utils，并说明需要修掉的边界问题。
+```
+
 显式调用前，需要确保对应目录已安装到 Codex 的 skill 搜索路径。
 
 ## 规范执行顺序
 
 1. 确认项目框架、版本和现有代码模式。
 2. 需要新增文件时，先按 `seacraft-frontend-spa-conventions` 的决策树确定落位，再开始写代码。
-3. 读取与当前任务相关的 `references/` 文档。新 Vite 工程或首次接入先读 `project-bootstrap.md`；播放器任务再读 `player-overview.md`；多画面/遮罩/图标任务读 `multi-window-player.md` / `player-mask.md` / `svg-icon.md`；分片上传任务读 `global-uploader.md`；公共 hooks 任务先读 `hook-catalog.md`，再按分组读 `ui-hooks.md` / `table-hooks.md` / `inline-css-vars.md` / `echarts-hook.md`，需要抽象时读 `extraction-guide.md`。
+3. 读取与当前任务相关的 `references/` 文档。新 Vite 工程或首次接入先读 `project-bootstrap.md`；播放器任务再读 `player-overview.md`；多画面/遮罩/图标任务读 `multi-window-player.md` / `player-mask.md` / `svg-icon.md`；分片上传任务读 `global-uploader.md`；公共 hooks 任务先读 `hook-catalog.md`，再按分组读 `ui-hooks.md` / `table-hooks.md` / `inline-css-vars.md` / `echarts-hook.md`；公共 utils 任务先读 `catalog.md`，再按域读 `type-tree-table.md` / `format.md` / `browser-file.md` / `color.md`；需要抽象时读对应的 `extraction-guide.md`。
 4. 按 skill 约定实现组件或功能。
 5. 组件实现完成后，检查项目中是否已有 `Prettier`、`ESLint` 和 `Stylelint` 配置。
 6. 如果存在，按项目已有规则格式化本次修改的文件，并修复相关格式化、lint 和 stylelint 错误。
@@ -223,6 +252,7 @@ $seacraft-shared-hooks
 - 目录分层规则只写在 `seacraft-frontend-spa-conventions`，Vue / React skill 不重复定义目录结构。
 - 公共组件 API 以发布版本源码为准；`README` 与源码冲突时在 skill 中标注差异，不要把错误默认值写进规范。
 - 公共 hooks 的行为以源码为准；把业务耦合写成「适配点」，不要伪装成开箱即用。
+- 公共 utils 只收录跨项目、无业务/UI 依赖的纯函数；旧实现缺陷要在 skill 中标注并给出修复建议。
 - 新增参考文档后，在入口 `SKILL.md` 中补充链接。
 - 修改入口文件后执行 skill 校验：
 
@@ -233,6 +263,7 @@ py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate
 py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-frontend-spa-conventions
 py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-shared-components
 py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-shared-hooks
+py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-shared-utils
 ```
 
 macOS / Linux：
@@ -243,4 +274,5 @@ python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_
 python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" ./seacraft-frontend-spa-conventions
 python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" ./seacraft-shared-components
 python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" ./seacraft-shared-hooks
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" ./seacraft-shared-utils
 ```

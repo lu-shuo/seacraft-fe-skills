@@ -32,6 +32,7 @@ metadata:
 - Vue 测试：[`vue-testing-best-practices.md`](references/vue-testing-best-practices.md)
 - 可接受 plain value、ref 或 getter 的 composable：[`create-adaptable-composable.md`](references/create-adaptable-composable.md)
 - 公司公共 hooks 的使用、分级与抽象：见 `seacraft-shared-hooks` skill
+- 公司公共 utils 的使用与提取：见 `seacraft-shared-utils` skill
 
 ## 完成前检查
 
