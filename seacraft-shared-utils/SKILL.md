@@ -1,6 +1,6 @@
 ---
 name: seacraft-shared-utils
-description: Company shared frontend utility library abstracted from LSWork Vue admin projects (jy-template-ui, jy-digital-patrol-ui, jy-application-space-ui, jy-application-supervision-ui-new, jy-application-tqmp-ui, jy-application-resourcemanage-ui). Covers type guards, tree/table helpers, time/date/number/file formatting, browser/DOM, device/URL detection, UUID/MD5, base64/file, and color conversion. Use when adding or extracting a plain utility or deduplicating repeated helpers. 中文触发：公共 utils、工具函数、类型判断、树扁平化、时间格式化、日期格式化、文件大小、浏览器工具、设备判断、UUID、MD5、base64、颜色转换。
+description: "Company shared frontend utility library abstracted from company Vue admin projects (jy-template-ui, jy-digital-patrol-ui, jy-application-space-ui, jy-application-supervision-ui-new, jy-application-tqmp-ui, jy-application-resourcemanage-ui). Covers type guards, tree/table helpers, time/date/number/file formatting, browser/DOM, device/URL detection, UUID/MD5, base64/file, and color conversion. Use when adding or extracting a plain utility or deduplicating repeated helpers. 中文触发：公共 utils、工具函数、类型判断、树扁平化、时间格式化、日期格式化、文件大小、浏览器工具、设备判断、UUID、MD5、base64、颜色转换。"
 license: MIT
 metadata:
   author: seacraft
@@ -11,7 +11,7 @@ metadata:
 
 公共 utils 是**无框架状态、无业务单例**的纯函数集合，放在 L4 基础层（`src/utils/` 或 `packages/utils/src/`）。页面、组件、store、hook 都可以依赖，但 utils 不得 import 页面、组件、路由、store 或 API model。
 
-本 skill 从 `D:\LSWork` 下多个 Vue 后台项目提取：
+本 skill 从公司多个 Vue 后台项目提取：
 
 | 项目 | 主要贡献 |
 | --- | --- |

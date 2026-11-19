@@ -1,6 +1,6 @@
 # 从多个项目提取公共 utils
 
-本文说明如何把 `D:\LSWork` 各前端项目 `utils/` 里的重复函数收敛成公共包：盘点、去重、修缺陷、设计 API、测试、打包、迁移。
+本文说明如何从公司多个前端项目的 `utils/` 里把重复函数收敛成公共包：盘点、去重、修缺陷、设计 API、测试、打包、迁移。
 
 ## 1. 盘点
 
@@ -9,6 +9,9 @@
 按项目导出名求交集，比逐个读文件快：
 
 ```powershell
+# 存放各前端项目的目录，按本机情况设置
+$workspace = "<workspace-root>"
+
 $projects = @(
   'jy-template-ui',
   'jy-application-supervision-ui-new',
@@ -19,7 +22,7 @@ $projects = @(
 
 $sets = @{}
 foreach ($p in $projects) {
-  $file = "D:\LSWork\$p\src\utils\index.ts"
+  $file = Join-Path $workspace "$p\src\utils\index.ts"
   if (!(Test-Path $file)) { continue }
   $sets[$p] = Select-String -Path $file -Pattern '^\s*export\s+(const|function|async function)\s+([A-Za-z0-9_]+)' |
     ForEach-Object { $_.Matches[0].Groups[2].Value }

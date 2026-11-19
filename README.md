@@ -2,6 +2,9 @@
 
 Seacraft 前端开发规范 skill，当前包含 Vue、React、文件落位规范、公共组件、公共 hooks 和公共 utils 六部分。文档采用“英文 YAML 元数据 + 中文规范说明 + 英文技术标识”的形式。
 
+> 线上仓库：<https://github.com/lu-shuo/seacraft-fe-skills>  
+> 下文命令默认在仓库根目录执行，不依赖任何本机绝对路径。
+
 ## 包含的 Skill
 
 ### `seacraft-vue-skills`
@@ -70,7 +73,7 @@ Seacraft 前端开发规范 skill，当前包含 Vue、React、文件落位规�
 
 ### `seacraft-shared-utils`
 
-公司公共前端 utils 的使用与提取规范，来源 `D:\LSWork` 下多个 Vue 后台项目：
+公司公共前端 utils 的使用与提取规范，来源公司多个 Vue 后台项目：
 
 - 类型与值：`is`、`isFunction`、`isObject`、`isArray`、`getType` 等
 - 树与表格：`getFlatArr`、`findItemNested`、`handleProp`、`handleRowAccordingToProp`、`filterEnum`、`formatValue`
@@ -189,22 +192,24 @@ $CODEX_HOME/skills
 把下面的提示词发给有本地文件读写权限的 AI（Codex CLI、Claude Code、Cursor 等）。Web 聊天窗口无法直接写本地目录。
 
 ```text
-请把 D:\LSWork\hz-skills 仓库中的 6 个 skill 安装到 Codex：
+请把线上仓库 https://github.com/lu-shuo/seacraft-fe-skills.git 中的 6 个 skill 安装到 Codex：
 
-1. 源仓库：D:\LSWork\hz-skills（如果路径不同，先问我确认，不要猜）。
-2. 目标目录：$HOME/.codex/skills；如果设置了 CODEX_HOME，则用 $CODEX_HOME/skills。
-3. 复制以下目录，保持目录名不变：
+1. 如果本机还没有仓库，先 clone 到当前目录下的 hz-skills：
+   git clone https://github.com/lu-shuo/seacraft-fe-skills.git hz-skills
+2. 以 clone 后的仓库根目录为源目录，不要使用我的本机绝对路径，也不要猜路径。
+3. 目标目录：$HOME/.codex/skills；如果设置了 CODEX_HOME，则用 $CODEX_HOME/skills。
+4. 复制以下目录，保持目录名不变：
    seacraft-vue-skills
    seacraft-react-skills
    seacraft-frontend-spa-conventions
    seacraft-shared-components
    seacraft-shared-hooks
    seacraft-shared-utils
-4. 不要修改 SKILL.md 或 references 内容。目标已存在同名目录时先备份并告诉我，不要静默覆盖。
-5. 每个目录必须存在 SKILL.md。如果本机有
+5. 不要修改 SKILL.md 或 references 内容。目标已存在同名目录时先备份并告诉我，不要静默覆盖。
+6. 每个目录必须存在 SKILL.md。如果本机有
    ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py，
    逐个执行校验并汇总结果。
-6. 最后列出已安装的 skill、实际目标路径，并提醒我重启或刷新 Codex。
+7. 最后列出已安装的 skill、实际目标路径，并提醒我重启或刷新 Codex。
 ```
 
 ### 让 AI 安装并写入 AGENTS.md 路由表
@@ -213,12 +218,15 @@ $CODEX_HOME/skills
 请完成两件事：
 
 A. 安装 skill
-把 D:\LSWork\hz-skills 下的 6 个 skill 复制到 $HOME/.codex/skills
-（如果设置了 CODEX_HOME，则用 $CODEX_HOME/skills），保持目录名不变；
-已存在同名目录时先备份并询问，不要静默覆盖。
+1. 如果本机还没有仓库，先 clone：
+   git clone https://github.com/lu-shuo/seacraft-fe-skills.git hz-skills
+2. 以 clone 后的仓库根目录为源目录，不要使用我的本机绝对路径。
+3. 把仓库中的 6 个 skill 复制到 $HOME/.codex/skills
+   （如果设置了 CODEX_HOME，则用 $CODEX_HOME/skills），保持目录名不变；
+   已存在同名目录时先备份并询问，不要静默覆盖。
 
 B. 在当前项目根目录创建或更新 AGENTS.md
-1. 以 D:\LSWork\hz-skills\AGENTS.md.example 为模板。
+1. 以 clone 后仓库根目录的 AGENTS.md.example 为模板。
 2. 如果 AGENTS.md 已存在，保留原有内容，只合并「前端公共资产路由」章节；
    不要覆盖项目已有的构建、测试、代码风格约定。
 3. 根据当前项目的 package.json / 技术栈删减无关行：
@@ -235,7 +243,8 @@ B. 在当前项目根目录创建或更新 AGENTS.md
 ```text
 请在当前项目根目录创建或更新 AGENTS.md：
 
-1. 以 D:\LSWork\hz-skills\AGENTS.md.example 为模板。
+1. 以 hz-skills 仓库根目录的 AGENTS.md.example 为模板
+   （仓库地址：https://github.com/lu-shuo/seacraft-fe-skills.git）。
 2. 保留现有 AGENTS.md 的所有内容，只新增/合并「前端公共资产路由」章节。
 3. 按当前项目技术栈删减无关行，不要照抄全部。
 4. 技能名与实际安装目录保持一致；默认路径是 ~/.codex/skills/<name>/SKILL.md。
@@ -324,12 +333,14 @@ $seacraft-shared-utils
 
 ```powershell
 $env:PYTHONUTF8 = "1"
-py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-vue-skills
-py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-react-skills
-py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-frontend-spa-conventions
-py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-shared-components
-py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-shared-hooks
-py -3 C:\Users\用户\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\seacraft-shared-utils
+$codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME '.codex' }
+$validator = Join-Path $codexHome 'skills\.system\skill-creator\scripts\quick_validate.py'
+py -3 $validator .\seacraft-vue-skills
+py -3 $validator .\seacraft-react-skills
+py -3 $validator .\seacraft-frontend-spa-conventions
+py -3 $validator .\seacraft-shared-components
+py -3 $validator .\seacraft-shared-hooks
+py -3 $validator .\seacraft-shared-utils
 ```
 
 macOS / Linux：
