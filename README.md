@@ -86,7 +86,7 @@ Seacraft 前端开发规范 skill，当前包含 Vue、React、文件落位规�
 ## 目录结构
 
 ```text
-hz-skills/
+seacraft-fe-skills/
 ├── README.md
 ├── AGENTS.md.example
 ├── seacraft-frontend-spa-conventions/
@@ -194,8 +194,8 @@ $CODEX_HOME/skills
 ```text
 请把线上仓库 https://github.com/lu-shuo/seacraft-fe-skills.git 中的 6 个 skill 安装到 Codex：
 
-1. 如果本机还没有仓库，先 clone 到当前目录下的 hz-skills：
-   git clone https://github.com/lu-shuo/seacraft-fe-skills.git hz-skills
+1. 如果本机还没有仓库，先 clone 到当前目录下的 seacraft-fe-skills：
+   git clone https://github.com/lu-shuo/seacraft-fe-skills.git seacraft-fe-skills
 2. 以 clone 后的仓库根目录为源目录，不要使用我的本机绝对路径，也不要猜路径。
 3. 目标目录：$HOME/.codex/skills；如果设置了 CODEX_HOME，则用 $CODEX_HOME/skills。
 4. 复制以下目录，保持目录名不变：
@@ -219,7 +219,7 @@ $CODEX_HOME/skills
 
 A. 安装 skill
 1. 如果本机还没有仓库，先 clone：
-   git clone https://github.com/lu-shuo/seacraft-fe-skills.git hz-skills
+   git clone https://github.com/lu-shuo/seacraft-fe-skills.git seacraft-fe-skills
 2. 以 clone 后的仓库根目录为源目录，不要使用我的本机绝对路径。
 3. 把仓库中的 6 个 skill 复制到 $HOME/.codex/skills
    （如果设置了 CODEX_HOME，则用 $CODEX_HOME/skills），保持目录名不变；
@@ -243,7 +243,7 @@ B. 在当前项目根目录创建或更新 AGENTS.md
 ```text
 请在当前项目根目录创建或更新 AGENTS.md：
 
-1. 以 hz-skills 仓库根目录的 AGENTS.md.example 为模板
+1. 以 seacraft-fe-skills 仓库根目录的 AGENTS.md.example 为模板
    （仓库地址：https://github.com/lu-shuo/seacraft-fe-skills.git）。
 2. 保留现有 AGENTS.md 的所有内容，只新增/合并「前端公共资产路由」章节。
 3. 按当前项目技术栈删减无关行，不要照抄全部。
