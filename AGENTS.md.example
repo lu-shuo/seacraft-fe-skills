@@ -1,0 +1,34 @@
+# 项目协作约定
+
+> 本文件是 `hz-skills` 提供的路由表模板。复制到目标项目根目录后按实际技术栈删减；
+> 已存在 `AGENTS.md` 时只合并「前端公共资产路由」章节，不要覆盖项目原有约定。
+
+## 前端公共资产路由
+
+前端任务先按下表加载对应 skill，再开始写代码。具体 skill 优先于通用 skill。
+
+| 任务 / 关键词 | 先加载的 skill | 入口文档 |
+| --- | --- | --- |
+| 播放器、JyKmediaPlayer、JyKmediaMobilePlayer、JyAliPlayer、MultiWindowPlayer、PlayerMask、SvgIcon、GlobalUploader、分片上传、播放引擎、Vite/Webpack 播放器配置 | `seacraft-shared-components` | `SKILL.md` |
+| 公共 hooks、useDialog、useConfirm、useDownload、useTable、useSelection、useEcharts、表格分页、表格多选、跨页选择、CSS 变量 | `seacraft-shared-hooks` | `SKILL.md` |
+| 公共 utils、getType、getFlatArr、findItemNested、formatDate、formatFileSize、parseTimeToSeconds、isMobile、getQueryParam、generateUUID、hexToRgb | `seacraft-shared-utils` | `SKILL.md` |
+| 新增/移动/重命名页面、组件、composable、api、store、类型、工具、样式、测试；判定目录归属 | `seacraft-frontend-spa-conventions` | `SKILL.md` |
+| Vue 3 页面/组件、Composition API、Composable、Pinia、Vue Router、Vue 测试 | `seacraft-vue-skills` | `SKILL.md` |
+| React、Next.js、React Native、Expo、性能优化、View Transition | `seacraft-react-skills` | `SKILL.md` |
+
+<!-- 按项目技术栈删减：纯 Vue 项目可删除 React 行；不使用播放器/上传的项目可删除对应行。 -->
+
+## 执行规则
+
+1. 先判断任务类型，加载对应 `SKILL.md`，再按其中「按场景读取参考文档」读 `references/`。
+2. 同时命中多个 skill 时，具体 skill 优先：`seacraft-shared-*` > `seacraft-vue-skills` / `seacraft-react-skills`；目录问题始终以 `seacraft-frontend-spa-conventions` 为准。
+3. 涉及公共组件、hook、util，先检索仓库已有实现，确认没有第二份再新增；不要复制业务专用实现。
+4. 不凭记忆写 `jy-player-ui`、`vue-simple-uploader` 等库的 API；以 skill 中的源码 API 和注意事项为准。
+5. 交付前执行对应 skill 的「完成前检查」，再按项目已有 Prettier / ESLint / Stylelint 配置格式化。
+6. 如果宿主不支持自动 skill 选择，用显式调用：`$seacraft-shared-utils`，或直接读取 `~/.codex/skills/<name>/SKILL.md`。
+
+## 禁止
+
+- 不把 `useTheme`、`useWatermark`、`useStompSocket`、`useRecordPlayerState` 等业务 hook 复制到公共项目。
+- 不把菜单、权限、主题、播放器、socket 等业务 utils 放进公共 utils。
+- 不在业务页面重复实现播放器遮罩、分片上传、表格分页/多选等已有公共能力。

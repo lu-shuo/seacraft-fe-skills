@@ -1,6 +1,6 @@
 ---
 name: seacraft-shared-utils
-description: Company shared frontend utility library abstracted from the LSWork Vue admin projects (jy-template-ui, jy-digital-patrol-ui, jy-application-space-ui, jy-application-supervision-ui-new, jy-application-tqmp-ui) plus jy-application-resourcemanage-ui. Covers type guards, tree/object/table helpers, time/number/file formatting, browser/DOM helpers, device and URL detection, UUID/MD5, base64/file, and color conversion. Use when adding or extracting a plain utility, deduplicating repeated helpers across projects, or publishing a tree-shakable utils package.
+description: Company shared frontend utility library abstracted from LSWork Vue admin projects (jy-template-ui, jy-digital-patrol-ui, jy-application-space-ui, jy-application-supervision-ui-new, jy-application-tqmp-ui, jy-application-resourcemanage-ui). Covers type guards, tree/table helpers, time/date/number/file formatting, browser/DOM, device/URL detection, UUID/MD5, base64/file, and color conversion. Use when adding or extracting a plain utility or deduplicating repeated helpers. 中文触发：公共 utils、工具函数、类型判断、树扁平化、时间格式化、日期格式化、文件大小、浏览器工具、设备判断、UUID、MD5、base64、颜色转换。
 license: MIT
 metadata:
   author: seacraft

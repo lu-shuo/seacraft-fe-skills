@@ -85,6 +85,7 @@ Seacraft 前端开发规范 skill，当前包含 Vue、React、文件落位规�
 ```text
 hz-skills/
 ├── README.md
+├── AGENTS.md.example
 ├── seacraft-frontend-spa-conventions/
 │   ├── SKILL.md
 │   └── references/
@@ -143,6 +144,8 @@ hz-skills/
 
 每个 skill 目录都必须包含一个 `SKILL.md`。`SKILL.md` 是入口文件，`references/` 中的文档按任务需要读取。
 
+根目录的 `AGENTS.md.example` 是项目级路由表模板，用于让 AI 在具体项目中优先加载对应 skill。
+
 ## 安装到 Codex
 
 当前目录是 skill 源目录。要让 Codex 自动发现这些 skill，需要将各 skill 目录复制到 Codex 的 skill 搜索路径。
@@ -150,7 +153,8 @@ hz-skills/
 Windows PowerShell：
 
 ```powershell
-$skillRoot = "C:\Users\用户\.codex\skills"
+$skillRoot = Join-Path $HOME '.codex\skills'
+New-Item -ItemType Directory -Force $skillRoot | Out-Null
 Copy-Item -Recurse -Force .\seacraft-vue-skills $skillRoot
 Copy-Item -Recurse -Force .\seacraft-react-skills $skillRoot
 Copy-Item -Recurse -Force .\seacraft-frontend-spa-conventions $skillRoot
@@ -180,6 +184,66 @@ $CODEX_HOME/skills
 
 安装后重新打开或刷新 Codex，使 skill 列表重新加载。
 
+### 让 AI 一键安装
+
+把下面的提示词发给有本地文件读写权限的 AI（Codex CLI、Claude Code、Cursor 等）。Web 聊天窗口无法直接写本地目录。
+
+```text
+请把 D:\LSWork\hz-skills 仓库中的 6 个 skill 安装到 Codex：
+
+1. 源仓库：D:\LSWork\hz-skills（如果路径不同，先问我确认，不要猜）。
+2. 目标目录：$HOME/.codex/skills；如果设置了 CODEX_HOME，则用 $CODEX_HOME/skills。
+3. 复制以下目录，保持目录名不变：
+   seacraft-vue-skills
+   seacraft-react-skills
+   seacraft-frontend-spa-conventions
+   seacraft-shared-components
+   seacraft-shared-hooks
+   seacraft-shared-utils
+4. 不要修改 SKILL.md 或 references 内容。目标已存在同名目录时先备份并告诉我，不要静默覆盖。
+5. 每个目录必须存在 SKILL.md。如果本机有
+   ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py，
+   逐个执行校验并汇总结果。
+6. 最后列出已安装的 skill、实际目标路径，并提醒我重启或刷新 Codex。
+```
+
+### 让 AI 安装并写入 AGENTS.md 路由表
+
+```text
+请完成两件事：
+
+A. 安装 skill
+把 D:\LSWork\hz-skills 下的 6 个 skill 复制到 $HOME/.codex/skills
+（如果设置了 CODEX_HOME，则用 $CODEX_HOME/skills），保持目录名不变；
+已存在同名目录时先备份并询问，不要静默覆盖。
+
+B. 在当前项目根目录创建或更新 AGENTS.md
+1. 以 D:\LSWork\hz-skills\AGENTS.md.example 为模板。
+2. 如果 AGENTS.md 已存在，保留原有内容，只合并「前端公共资产路由」章节；
+   不要覆盖项目已有的构建、测试、代码风格约定。
+3. 根据当前项目的 package.json / 技术栈删减无关行：
+   - 纯 Vue 项目删除 React 行；
+   - 不使用播放器/上传的项目删除对应行；
+   - 没有 Pinia/Router 的项目可精简 Vue 行描述。
+4. 如果已存在同名章节，先展示差异，再合并。
+5. 安装完成后逐个校验 SKILL.md，并展示 AGENTS.md 的 git diff。
+6. 不要自动 git commit / push，等我确认。
+```
+
+### 只给已有项目加 AGENTS.md 路由表
+
+```text
+请在当前项目根目录创建或更新 AGENTS.md：
+
+1. 以 D:\LSWork\hz-skills\AGENTS.md.example 为模板。
+2. 保留现有 AGENTS.md 的所有内容，只新增/合并「前端公共资产路由」章节。
+3. 按当前项目技术栈删减无关行，不要照抄全部。
+4. 技能名与实际安装目录保持一致；默认路径是 ~/.codex/skills/<name>/SKILL.md。
+5. 完成后展示 diff，不要自动 commit。
+```
+
+模板文件：[`AGENTS.md.example`](AGENTS.md.example)。
+
 ## 使用方式
 
 ### 自动调用
@@ -194,6 +258,8 @@ $CODEX_HOME/skills
 - 接入公司公共组件（`jy-player-ui` 播放器、`MultiWindowPlayer` 多画面、`PlayerMask` 遮罩、`SvgIcon` 图标、`GlobalUploader` 分片上传）、配置播放引擎、处理多屏同步或排查播放器异常时使用 `seacraft-shared-components`。
 - 使用或抽象通用公共 hooks（弹窗、确认、下载、表格、多选、CSS 变量、ECharts）时使用 `seacraft-shared-hooks`。
 - 新增或提取通用 utils（类型判断、树、时间/数字格式化、浏览器/DOM、设备、文件、颜色）时使用 `seacraft-shared-utils`。
+
+安装后仍可能因为描述匹配、宿主实现或任务表述而漏选。需要稳定命中时，在项目根目录加入 `AGENTS.md` 路由表，或显式写 `$seacraft-shared-utils` 这类 skill 名。
 
 ### 显式调用
 

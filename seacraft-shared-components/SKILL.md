@@ -1,6 +1,6 @@
 ---
 name: seacraft-shared-components
-description: Company public frontend component integration guide for Vue 3 business apps, covering the jy-player-ui player suite (JyKmediaPlayer, JyKmediaMobilePlayer, JyAliPlayer, JyPlayerControl, JyMobilePlayerControl, JyControlProgress, JySlider), the jy-digital-patrol-ui business wrappers (MultiWindowPlayer multi-view player, PlayerMask loading/error/pause/end masks, SvgIcon SVG sprite icon), the jy-application-resourcemanage-ui GlobalUploader (chunked upload, MD5, instant upload, resume, global panel), and the full project wiring (dependencies, Vite/Webpack config, entry registration, build verification). Use when selecting a player, loading the KMedia/Aliplayer engine, wiring props/events/slots/exposes, building a custom control bar, syncing multiple screens, embedding a 1-4 view player, choosing player masks, adding SVG icons, implementing chunked upload, or bootstrapping a project so the whole flow runs end-to-end.
+description: "Company public frontend component integration guide for Vue 3 apps: the jy-player-ui player suite (JyKmediaPlayer, JyKmediaMobilePlayer, JyAliPlayer, controls, multi-screen), jy-digital-patrol-ui wrappers (MultiWindowPlayer, PlayerMask, SvgIcon), and jy-application-resourcemanage-ui GlobalUploader (chunked upload). Covers dependencies, engine scripts, Vite/Webpack setup, props/events/slots, and build verification. Use when integrating or debugging public players/components. 中文触发：公共播放器、多画面播放器、播放器遮罩、SVG 图标、分片上传、播放引擎、组件接入、Vite/Webpack 配置。"
 license: MIT
 metadata:
   author: seacraft

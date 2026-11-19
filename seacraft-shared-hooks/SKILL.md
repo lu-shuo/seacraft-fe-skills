@@ -1,6 +1,6 @@
 ---
 name: seacraft-shared-hooks
-description: Company shared Vue 3 hooks limited to genuinely reusable composables abstracted from jy-digital-patrol-ui/src/hooks - dialog, confirm, download, table pagination, table selection, inline CSS variables, and ECharts. Use when adding or reusing a generic hook, wiring its dependencies (Element Plus, ECharts, VueUse), or extracting a project hook into a reusable package without business-store, route, API, socket, or player coupling.
+description: "Company shared Vue 3 hooks limited to genuinely reusable composables abstracted from jy-digital-patrol-ui/src/hooks: dialog, confirm, download, table pagination, table selection, inline CSS variables, and ECharts. Use when adding or reusing a generic hook, wiring dependencies (Element Plus, ECharts, VueUse), or extracting a project hook into a reusable package. 中文触发：公共 hooks、组合式函数、弹窗、确认、下载、表格查询、分页、表格多选、跨页选择、CSS 变量、ECharts、useDialog、useConfirm、useTable、useSelection、useEcharts。"
 license: MIT
 metadata:
   author: seacraft
